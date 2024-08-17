@@ -16,8 +16,7 @@ start_button = driver.find_element(By.XPATH, "//button[contains(text(),'Start')]
 start_button.click()
 
 
-df = pd.read_excel('challenge.xlsx')
-
+df = pd.read_excel("challenge.xlsx")
 
 
 WebDriverWait(driver, 10).until(
@@ -26,22 +25,22 @@ WebDriverWait(driver, 10).until(
 
 for index, row in df.iterrows():
     data = {
-        "First Name": row['First Name'],
-        "Last Name": row['Last Name '],
-        "Company Name": row['Company Name'],
-        "Role": row['Role in Company'],
-        "Address": row['Address'],
-        "Email": row['Email'],
-        "Phone": row['Phone Number']
+        "First Name": row["First Name"],
+        "Last Name": row["Last Name "],
+        "Company Name": row["Company Name"],
+        "Role": row["Role in Company"],
+        "Address": row["Address"],
+        "Email": row["Email"],
+        "Phone": row["Phone Number"],
     }
 
     for field, value in data.items():
-        input_element = driver.find_element(By.XPATH, f"//input[@ng-reflect-name='label{field.replace(' ', '')}']")
+        input_element = driver.find_element(
+            By.XPATH, f"//input[@ng-reflect-name='label{field.replace(' ', '')}']"
+        )
         input_element.clear()
         input_element.send_keys(str(value))
 
     submit_button = driver.find_element(By.XPATH, "//input[@value='Submit']")
     submit_button.click()
     time.sleep(2)
-
-
